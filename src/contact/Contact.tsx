@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
+import { setInitialState } from '../utils/setInitialState'
 
 export function Contact(): FC {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -19,11 +20,11 @@ export function Contact(): FC {
           <div className='address'>
             <div>
               <p>Street</p>
-              <p>122 East 9th Street</p>
+              <p></p>
             </div>
             <div>
               <p>City</p>
-              <p>Mobile</p>
+              <p></p>
             </div>
             <div>
               <p>State</p>
@@ -31,11 +32,11 @@ export function Contact(): FC {
             </div>
             <div>
               <p>Zip</p>
-              <p>36525</p>
+              <p></p>
             </div>
             <div>
               <p>Email</p>
-              <p>jessica@example.org</p>
+              <p></p>
             </div>
           </div>
           <div class name='journal'>

@@ -1,0 +1,104 @@
+interface Contact {
+  name: string;
+  telephone: string;
+  street?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  email?: string;
+}
+
+interface FirstNames {
+  uppercase: string;
+  lowercase: string;
+}
+
+interface Entry {
+  date: string;
+  content: string;
+}
+
+const firstNames = [
+  { uppercase: "Jessica", lowercase: "jessica" },
+  { uppercase: "Rebecca", lowercase: "rebecca" },
+  { uppercase: "Norah", lowercase: "norah" },
+  { uppercase: "Sandra", lowercase: "sandra" },
+]
+
+const lastNames = [
+  'Kim',
+  'McDonald',
+  'Sturgis',
+  'Fox',
+  'Watson',
+  'Simms',
+  'Sosa',
+]
+
+const addresses = [
+  { street: "122 East 9th Street", city: "Mobile", state: "AL", zip: "36525" },
+  { street: "1001 Washington Rd", city: "Chicago", state: "IL", zip: "60007" },
+  { street: "990 Pine Blvd", city: "Sacramento", state: "CA", zip: "94203" },
+  { street: "42421 W 11th St", city: "Ft Lauderdale", state: "FL", zip: "33303" },
+  { street: "668 Lincoln Pkwy", city: "Minneapolis", state: "MN", zip: "55401" },
+  { street: "3553 Maple Road", city: "Gary", state: "IN", zip: "46401" },
+]
+
+function getFirstName(): FirstNames {
+  const i = Math.floor(Math.random() * 4)
+
+  return firstNames[i]
+}
+
+function getLastName(): string {
+  const i = Math.floor(Math.random() * 6)
+
+  return lastNames[i]
+}
+
+function makeEntries(names: Array<string>): Entry[][] {
+  let entries = []
+
+  entries.push(
+    [
+      {
+        date: new Date(new Date().setDate(new Date().getDate() - 10)).toString(),
+        content: `I met ${names[0]} at this extremely expensive sandwich shop because I really feel like I do my best work when spending $55 for a sandwhich and a drink. As soon as ${names[0]} heard about this idea, we both agreed we had a winner. I immediately ran out to buy another Louise Carmen Honore notebook for this idea.`,
+      },
+      {
+        date: new Date(new Date().setDate(new Date().getDate() - 4)).toString(),
+        content: 'Over the next week we discussed the implementation details. We both agreed that a simple demo version would not need to save anything and could use some generic data. We were both so excited by the prospect of making a simple demo for this idea that we rewarded ourselves with the fanciest steak and lobster dinner we could find.',
+      },
+    ]
+  )
+
+  entries.push(
+    [
+      {
+        date: new Date(new Date().setDate(new Date().getDate() - 6)).toString(),
+        content: `I wanted to get a second opinion on this idea before I bought a second MacBook that would be used only to develop this idea, so ${names[1]} and I went out for artisanal Oreos and Dr Pepper. As soon as I described this idea, her wide smile told me I was on the right track.`
+      },
+      {
+        date: new Date(new Date().setDate(new Date().getDate() - 1)).toString(),
+        content: 'I showed her this design that I had painstakingly sketched out in my Louise Carmen Honore notebook and she immediately gave her stamp of approval. She tried to literally give a stamp of approval, but there was no way I could allow anyone, even my closest friends, to touch my Louise Carmen Honore notebook.'
+      },
+    ],
+  )
+
+  return entries
+}
+
+export function setInitialState() {
+  let contacts = []
+  const firstNames = [
+    getFirstName(),
+    getFirstName(),
+  ]
+  const lastNames = [
+    getLastName(),
+    getLastName(),
+  ]
+  const entries = makeEntries([firstNames[0].uppercase, firstNames[1].uppercase])
+
+  return entries
+}
