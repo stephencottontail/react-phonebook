@@ -3,6 +3,7 @@ import type { FC } from 'react'
 import { setInitialState } from '../utils/setInitialState'
 
 export function Contact(): FC {
+  console.log(setInitialState())
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (

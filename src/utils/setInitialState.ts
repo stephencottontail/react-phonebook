@@ -1,3 +1,8 @@
+interface Entry {
+  date: string;
+  content: string;
+}
+
 interface Contact {
   name: string;
   telephone: string;
@@ -6,16 +11,12 @@ interface Contact {
   state?: string;
   zip?: string;
   email?: string;
+  entries?: Entry[];
 }
 
 interface FirstNames {
   uppercase: string;
   lowercase: string;
-}
-
-interface Entry {
-  date: string;
-  content: string;
 }
 
 const firstNames = [
@@ -54,6 +55,39 @@ function getLastName(): string {
   const i = Math.floor(Math.random() * 6)
 
   return lastNames[i]
+}
+
+function getAddress(): object {
+  const i = Math.floor(Math.random() * 6)
+
+  return addresses[i]
+}
+
+function makeAddresses(firstName: Array<FirstName>, lastName: Array<string>): Contact[][] {
+  let data = []
+  let addresses = [
+    getAddress(),
+    getAddress(),
+  ]
+
+  data.push(
+    [
+      {
+        name: `${firstName[0].uppercase} ${lastName[0]}`,
+        telephone: '(555) 409-2304',
+        ...addresses[0]
+      }
+    ],
+    [
+      {
+        name: `${firstName[1].uppercase} ${lastName[1]}`,
+        telephone: '(555) 409-2304',
+        ...addresses[1]
+      }
+    ]
+  )
+
+  return data
 }
 
 function makeEntries(names: Array<string>): Entry[][] {
@@ -99,6 +133,7 @@ export function setInitialState() {
     getLastName(),
   ]
   const entries = makeEntries([firstNames[0].uppercase, firstNames[1].uppercase])
+  const addresses = makeAddresses(firstNames, lastNames)
 
-  return entries
+  return addressas
 }
