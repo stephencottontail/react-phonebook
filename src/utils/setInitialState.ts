@@ -63,67 +63,43 @@ function getAddress(): object {
   return addresses[i]
 }
 
-function makeAddresses(firstName: Array<FirstName>, lastName: Array<string>): Contact[][] {
-  let data = []
-  let addresses = [
+function makeAddresses(firstName: Array<FirstNames>, lastName: Array<string>): Contact[] {
+  const addresses = [
     getAddress(),
     getAddress(),
   ]
+  const first: Contact = { name: `${firstName[0].uppercase} ${lastName[0]}`, telephone: '(555) 409-2304', ...addresses[0] }
+  const second: Contact = { name: `${firstName[1].uppercase} ${lastName[1]}`, telephone: '(555) 409-2304', ...addresses[1] }
 
-  data.push(
-    [
-      {
-        name: `${firstName[0].uppercase} ${lastName[0]}`,
-        telephone: '(555) 409-2304',
-        ...addresses[0]
-      }
-    ],
-    [
-      {
-        name: `${firstName[1].uppercase} ${lastName[1]}`,
-        telephone: '(555) 409-2304',
-        ...addresses[1]
-      }
-    ]
-  )
-
-  return data
+  return [first, second]
 }
 
-function makeEntries(names: Array<string>): Entry[][] {
-  let entries = []
+function makeEntries(names: Array<string>): Array<Entry[]> {
+  const first: Entry[] = [
+    {
+      date: new Date(new Date().setDate(new Date().getDate() - 10)).toString(),
+      content: `I met ${names[0]} at this extremely expensive sandwich shop because I really feel like I do my best work when spending $55 for a sandwhich and a drink. As soon as ${names[0]} heard about this idea, we both agreed we had a winner. I immediately ran out to buy another Louise Carmen Honore notebook for this idea.`,
+    },
+    {
+      date: new Date(new Date().setDate(new Date().getDate() - 4)).toString(),
+      content: 'Over the next week we discussed the implementation details. We both agreed that a simple demo version would not need to save anything and could use some generic data. We were both so excited by the prospect of making a simple demo for this idea that we rewarded ourselves with the fanciest steak and lobster dinner we could find.',
+    },
+  ]
+  const second: Entry[] = [
+    {
+      date: new Date(new Date().setDate(new Date().getDate() - 6)).toString(),
+      content: `I wanted to get a second opinion on this idea before I bought a second MacBook that would be used only to develop this idea, so ${names[1]} and I went out for artisanal Oreos and Dr Pepper. As soon as I described this idea, her wide smile told me I was on the right track.`
+    },
+    {
+      date: new Date(new Date().setDate(new Date().getDate() - 1)).toString(),
+      content: 'I showed her this design that I had painstakingly sketched out in my Louise Carmen Honore notebook and she immediately gave her stamp of approval. She tried to literally give a stamp of approval, but there was no way I could allow anyone, even my closest friends, to touch my Louise Carmen Honore notebook.'
+    },
+  ]
 
-  entries.push(
-    [
-      {
-        date: new Date(new Date().setDate(new Date().getDate() - 10)).toString(),
-        content: `I met ${names[0]} at this extremely expensive sandwich shop because I really feel like I do my best work when spending $55 for a sandwhich and a drink. As soon as ${names[0]} heard about this idea, we both agreed we had a winner. I immediately ran out to buy another Louise Carmen Honore notebook for this idea.`,
-      },
-      {
-        date: new Date(new Date().setDate(new Date().getDate() - 4)).toString(),
-        content: 'Over the next week we discussed the implementation details. We both agreed that a simple demo version would not need to save anything and could use some generic data. We were both so excited by the prospect of making a simple demo for this idea that we rewarded ourselves with the fanciest steak and lobster dinner we could find.',
-      },
-    ]
-  )
-
-  entries.push(
-    [
-      {
-        date: new Date(new Date().setDate(new Date().getDate() - 6)).toString(),
-        content: `I wanted to get a second opinion on this idea before I bought a second MacBook that would be used only to develop this idea, so ${names[1]} and I went out for artisanal Oreos and Dr Pepper. As soon as I described this idea, her wide smile told me I was on the right track.`
-      },
-      {
-        date: new Date(new Date().setDate(new Date().getDate() - 1)).toString(),
-        content: 'I showed her this design that I had painstakingly sketched out in my Louise Carmen Honore notebook and she immediately gave her stamp of approval. She tried to literally give a stamp of approval, but there was no way I could allow anyone, even my closest friends, to touch my Louise Carmen Honore notebook.'
-      },
-    ],
-  )
-
-  return entries
+  return [first, second]
 }
 
-export function setInitialState() {
-  let contacts = []
+export function setInitialState(): Contact[] {
   const firstNames = [
     getFirstName(),
     getFirstName(),
@@ -134,6 +110,14 @@ export function setInitialState() {
   ]
   const entries = makeEntries([firstNames[0].uppercase, firstNames[1].uppercase])
   const addresses = makeAddresses(firstNames, lastNames)
+  const first: Contact = {
+    ...addresses[0],
+    entries: entries[0]
+  }
+  const second: Contact = {
+    ...addresses[1],
+    entries: entries[1]
+  }
 
-  return addressas
+  return [first, second]
 }
