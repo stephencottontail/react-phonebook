@@ -54,8 +54,8 @@ function makeAddresses(firstName: Array<FirstNames>, lastName: Array<string>): C
     getAddress(),
     getAddress(),
   ]
-  const first: Contact = { name: `${firstName[0].uppercase} ${lastName[0]}`, telephone: '(555) 409-2304', ...addresses[0] }
-  const second: Contact = { name: `${firstName[1].uppercase} ${lastName[1]}`, telephone: '(555) 409-2304', ...addresses[1] }
+  const first: Contact = { name: `${firstName[0].uppercase} ${lastName[0]}`, telephone: '(555) 409-2304', email: `${firstName[0].lowercase}@example.org`, ...addresses[0] }
+  const second: Contact = { name: `${firstName[1].uppercase} ${lastName[1]}`, telephone: '(555) 409-2304', email: `${firstName[1].lowercase}@example.org`, ...addresses[1] }
 
   return [first, second]
 }
