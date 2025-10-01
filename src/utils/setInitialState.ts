@@ -1,18 +1,4 @@
-interface Entry {
-  date: string;
-  content: string;
-}
-
-interface Contact {
-  name: string;
-  telephone: string;
-  street?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  email?: string;
-  entries?: Entry[];
-}
+import type { Contact, Entry } from '../types'
 
 interface FirstNames {
   uppercase: string;

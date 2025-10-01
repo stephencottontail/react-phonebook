@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import { setInitialState } from '../utils/setInitialState'
+import { setInitialState } from '../utils/'
 
 export function Contact(): FC {
   console.log(setInitialState())
