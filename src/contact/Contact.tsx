@@ -61,10 +61,14 @@ export function Contact() {
           : <Display address={contacts[active]} />
         : null
       }
-      { contacts[active].entries
-        ? <Journal entries={contacts[active].entries} />
-        : null
-      }
+      { active != -1 && (
+        <Journal
+          active={active}
+          contacts={contacts}
+          setContacts={setContacts}
+          entries={contacts[active]['entries']}
+        />
+      )}
     </>
   )
 }
