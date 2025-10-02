@@ -8,9 +8,29 @@ export function Contact() {
   const [isEditing, setIsEditing] = useState(false)
   const [contacts, setContacts] = useState(setInitialState)
   const [active, setActive] = useState(contacts.length - 1)
-
+  console.log(contacts)
+  console.log(active)
   return (
     <>
+      <div>
+        <button
+          onClick={ () => {
+            const newContact = {
+              entries: []
+            }
+            const newContacts = [
+              ...contacts,
+              newContact
+            ]
+
+            setContacts(newContacts)
+            setActive(newContacts.length - 1)
+            setIsEditing(true)
+          }}
+        >
+          Add New
+        </button>
+      </div>
       { contacts && contacts.map((el, i) => {
         const isActive = i == active
 

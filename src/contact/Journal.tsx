@@ -7,7 +7,7 @@ interface Props {
   active: number;
   contacts: Contact[];
   setContacts: Dispatch<SetStateAction<Contact[]>>;
-  entries: Entry[];
+  entries: Entry[] | null;
 }
 
 export function Journal({ active, contacts, setContacts, entries }: Props) {
