@@ -63,21 +63,21 @@ function makeAddresses(firstName: Array<FirstNames>, lastName: Array<string>): C
 function makeEntries(names: Array<string>): Array<Entry[]> {
   const first: Entry[] = [
     {
-      date: new Date(new Date().setDate(new Date().getDate() - 10)).toString(),
+      date: new Date(new Date().setDate(new Date().getDate() - 10)),
       content: `I met ${names[0]} at this extremely expensive sandwich shop because I really feel like I do my best work when spending $55 for a sandwhich and a drink. As soon as ${names[0]} heard about this idea, we both agreed we had a winner. I immediately ran out to buy another Louise Carmen Honore notebook for this idea.`,
     },
     {
-      date: new Date(new Date().setDate(new Date().getDate() - 4)).toString(),
+      date: new Date(new Date().setDate(new Date().getDate() - 4)),
       content: 'Over the next week we discussed the implementation details. We both agreed that a simple demo version would not need to save anything and could use some generic data. We were both so excited by the prospect of making a simple demo for this idea that we rewarded ourselves with the fanciest steak and lobster dinner we could find.',
     },
   ]
   const second: Entry[] = [
     {
-      date: new Date(new Date().setDate(new Date().getDate() - 6)).toString(),
+      date: new Date(new Date().setDate(new Date().getDate() - 6)),
       content: `I wanted to get a second opinion on this idea before I bought a second MacBook that would be used only to develop this idea, so ${names[1]} and I went out for artisanal Oreos and Dr Pepper. As soon as I described this idea, her wide smile told me I was on the right track.`
     },
     {
-      date: new Date(new Date().setDate(new Date().getDate() - 1)).toString(),
+      date: new Date(new Date().setDate(new Date().getDate() - 1)),
       content: 'I showed her this design that I had painstakingly sketched out in my Louise Carmen Honore notebook and she immediately gave her stamp of approval. She tried to literally give a stamp of approval, but there was no way I could allow anyone, even my closest friends, to touch my Louise Carmen Honore notebook.'
     },
   ]

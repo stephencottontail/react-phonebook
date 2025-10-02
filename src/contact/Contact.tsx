@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { setInitialState } from '../utils/'
 import { Display } from './Display.tsx'
 import { Form } from './Form.tsx'
+import { Journal } from './Journal.tsx'
 
 export function Contact() {
   const [isEditing, setIsEditing] = useState(false)
@@ -58,6 +59,10 @@ export function Contact() {
             />
           )
           : <Display address={contacts[active]} />
+        : null
+      }
+      { contacts[active].entries
+        ? <Journal entries={contacts[active].entries} />
         : null
       }
     </>

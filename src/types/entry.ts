@@ -1,4 +1,4 @@
 export interface Entry {
-  date: string;
+  date: Date;
   content: string;
 }

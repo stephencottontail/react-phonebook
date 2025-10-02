@@ -40,20 +40,6 @@ export function Display({address}: Props) {
           </div>
         )}
       </div>
-      { address.entries && (
-        <div className='journal'>
-          { address.entries.map((el, i) => (
-            <article
-              key={`journal-${i}`}
-            >
-              <header>
-                <p>{el.date}</p>
-              </header>
-              <p>{el.content}</p>
-            </article>
-          ))}
-        </div>
-      )}
     </>
   )
 }
