@@ -21,10 +21,17 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
     day: 'numeric',
   };
 
+  function parseAndSanitizeMarkdown(markdown: FormDataEntryValue | string): string {
+    const usHTML: string = marked.parse(markdown)
+    const sHTML: string = DOMPurify.sanitize(usHTML)
+
+    return sHTML
+  }
+
   function addEntry(formData: FormData) {
     const usMarkdown: FormDataEntryValue = formData.get('markdown')
-    const usHTML: string = marked.parse(usMarkdown)
-    const sHTML: string = DOMPurify.sanitize(usHTML)
+    const sHTML = parseAndSanitizeMarkdown(usMarkdown)
+
     const newEntry: Entry = {
       date: new Date(),
       content: sHTML
@@ -40,16 +47,20 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
       { entries.length
         ? (
           <div className='journal__entries'>
-            { entries.map((el: Entry, i: number) => (
-              <article
-                key={`journal-${i}`}
-              >
-                <header>
-                  <p>{el.date.toLocaleDateString(locale, options)}</p>
-                </header>
-                <p>{el.content}</p>
-              </article>
-            ))}
+            { entries.map((el: Entry, i: number) => {
+              const sHTML: string = parseAndSanitizeMarkdown(el.content)
+
+              return (
+                <article
+                  key={`journal-${i}`}
+                >
+                  <header>
+                    <p>{el.date.toLocaleDateString(locale, options)}</p>
+                  </header>
+                  <div dangerouslySetInnerHTML={{ __html: sHTML }} />
+                </article>
+              )
+            })}
           </div>
         )
         : (
