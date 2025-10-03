@@ -9,15 +9,22 @@ interface Props {
 }
 
 export function Form({active, contacts, setContacts, setIsEditing}: Props) {
-  let temp: Contact = {}
   const address: Contact= contacts[active]
 
   function handleCancel() {
     setIsEditing(false)
   }
 
-  function handleSave(e: React.SyntheticEvent<HTMLButtonElement>) {
-    e.preventDefault()
+  function editContact(formData: FormData) {
+    let temp: Contact = {
+      name: formData.get('name'),
+      telephone: formData.get('telephone'),
+      street: formData.get('street'),
+      city: formData.get('city'),
+      state: formData.get('state'),
+      zip: formData.get('zip'),
+      email: formData.get('email'),
+    }
 
     contacts[active] = { ...contacts[active], ...temp }
     setContacts(contacts)
@@ -25,95 +32,60 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
   }
 
   return (
-    <form>
+    <form action={editContact}>
       <label>
         <span>Name</span>
         <input
+          name='name'
           type='text'
-          value={address.name}
-          onChange={ (e) => {
-            temp = {
-              ...temp,
-              name: e.target.value
-            }
-          }}
+          defaultValue={address.name}
         />
       </label>
       <label>
         <span>Telephone</span>
         <input
+          name='telephone'
           type='tel'
-          value={address.telephone}
-          onChange={ (e) => {
-            temp = {
-              ...temp,
-              telephone: e.target.value
-            }
-          }}
+          defaultValue={address.telephone}
         />
       </label>
       <label>
         <span>Street</span>
         <textarea
-          value={address.street}
-          onChange={ (e) => {
-            temp = {
-              ...temp,
-              street: e.target.value
-            }
-          }}
+          name='street'
+          defaultValue={address.street}
         />
       </label>
       <label>
         <span>City</span>
         <input
+          name='city'
           type='text'
-          value={address.city}
-          onChange={ (e) => {
-            temp = {
-              ...temp,
-              city: e.target.value
-            }
-          }}
+          defaultValue={address.city}
         />
       </label>
       <label>
         <span>State</span>
         <input
+          name='state'
           type='text'
-          value={address.state}
-          onChange={ (e) => {
-            temp = {
-              ...temp,
-              state: e.target.value
-            }
-          }}
+          defaultValue={address.state}
         />
       </label>
       <label>
         <span>Zip</span>
         <input
+          name='zip'
           type='text'
-          value={address.zip}
-          onChange={ (e) => {
-            temp = {
-              ...temp,
-              zip: e.target.value
-            }
-          }}
+          defaultValue={address.zip}
         />
       </label>
       <label>
         <span>Email</span>
         <input
+          name='email'
           type='email'
-          value={address.email}
-          onChange={ (e) => {
-            temp = {
-              ...temp,
-              email: e.target.value
-            }
-          }}
+          defaultValue={address.email}
         />
       </label>
       <div>
@@ -122,9 +94,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
         >
           Cancel
         </button>
-        <button
-          onClick={handleSave}
-        >
+        <button>
           Save
         </button>
       </div>
