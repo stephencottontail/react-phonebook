@@ -1,12 +1,12 @@
 import type { Entry } from './entry'
 
 export interface Contact {
-  name: string;
-  telephone: string;
-  street?: string;
-  city?: string;
-  state?: string;
-  zip?: string;
-  email?: string;
-  entries?: Entry[];
+  name: string | null;
+  telephone: string | null;
+  street: string | null;
+  city: string | null;
+  state: string | null;
+  zip: string | null;
+  email: string | null;
+  entries: Entry[] | null;
 }

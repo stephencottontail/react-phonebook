@@ -1,4 +1,5 @@
 import type { Contact, Entry } from '../types'
+import { verifyObject } from '../utils/'
 
 interface FirstNames {
   uppercase: string;
@@ -83,16 +84,6 @@ function makeEntries(names: Array<string>): Array<Entry[]> {
   ]
 
   return [first, second]
-}
-
-function verifyObject(obj: Partial<Contact>): obj is Omit<Contact, "entries"> {
-  return typeof obj.name === 'string' &&
-    typeof obj.telephone === 'string' &&
-    typeof obj.street === 'string' &&
-    typeof obj.city === 'string' &&
-    typeof obj.state === 'string' &&
-    typeof obj.zip === 'string'&&
-    typeof obj.email === 'string'
 }
 
 export function setInitialState(): Array<Contact> {
