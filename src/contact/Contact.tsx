@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { Contact } from '../types/'
 import { setInitialState } from '../utils/'
 import { Display } from './Display.tsx'
 import { Form } from './Form.tsx'
@@ -8,17 +9,23 @@ export function Contact() {
   const [isEditing, setIsEditing] = useState(false)
   const [contacts, setContacts] = useState(setInitialState)
   const [active, setActive] = useState(contacts.length - 1)
-  console.log(contacts)
-  console.log(active)
+
   return (
     <>
       <div>
         <button
           onClick={ () => {
-            const newContact = {
+            const newContact: Contact = {
+              name: '',
+              telephone: '',
+              street: '',
+              city: '',
+              state: '',
+              zip: '',
+              email: '',
               entries: []
             }
-            const newContacts = [
+            const newContacts: Array<Contact> = [
               ...contacts,
               newContact
             ]

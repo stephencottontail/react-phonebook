@@ -95,7 +95,7 @@ function verifyObject(obj: Partial<Contact>): obj is Omit<Contact, "entries"> {
     typeof obj.email === 'string'
 }
 
-export function setInitialState(): Array<Contact | null> {
+export function setInitialState(): Array<Contact> {
   let data: Array<Contact> = []
   const firstNames = [
     getFirstName(),
