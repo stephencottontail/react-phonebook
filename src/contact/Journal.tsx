@@ -1,19 +1,20 @@
 import { useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
-import type { Entry } from '../types'
+import type { Contact, Entry } from '../types'
 
 interface Props {
   active: number;
   contacts: Contact[];
-  setContacts: Dispatch<SetStateAction<Contact[]>>;
+  setContacts: Dispatch<SetStateAction<Array<Contact>>>;
   entries: Entry[] | null;
 }
 
 export function Journal({ active, contacts, setContacts, entries }: Props) {
   const [isAddingEntry, setIsAddingEntry] = useState(false)
 
-  const locale: string = 'en-US' // problematically assumo user locale
+  const locale: string = 'en-US' // problematically assume user locale
   const options: Intl.DateTimeFormatOptions = {
     weekday: 'long',
     year: 'numeric',
@@ -21,15 +22,15 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
     day: 'numeric',
   };
 
-  function parseAndSanitizeMarkdown(markdown: FormDataEntryValue | string): string {
-    const usHTML: string = marked.parse(markdown)
+  function parseAndSanitizeMarkdown(markdown: string): string {
+    const usHTML: string = marked.parse(markdown) as string
     const sHTML: string = DOMPurify.sanitize(usHTML)
 
     return sHTML
   }
 
   function addEntry(formData: FormData) {
-    const usMarkdown: FormDataEntryValue = formData.get('markdown')
+    const usMarkdown: FormDataEntryValue = formData.get('markdown') as string
     const sHTML = parseAndSanitizeMarkdown(usMarkdown)
 
     const newEntry: Entry = {
@@ -37,14 +38,16 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
       content: sHTML
     }
 
-    contacts[active]['entries'].push(newEntry)
-    setContacts(contacts)
-    setIsAddingEntry(false)
+    if (contacts[active]['entries'] != null) {
+      contacts[active]['entries'].push(newEntry)
+      setContacts(contacts)
+      setIsAddingEntry(false)
+    }
   }
 
   return (
     <div className='journal'>
-      { entries.length
+      { entries != null && entries.length
         ? (
           <div className='journal__entries'>
             { entries.map((el: Entry, i: number) => {
