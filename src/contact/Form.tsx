@@ -1,6 +1,5 @@
 import type { Dispatch, SetStateAction } from 'react'
 import type { Contact } from '../types'
-import { verifyObject } from '../utils'
 
 interface Props {
   active: number;

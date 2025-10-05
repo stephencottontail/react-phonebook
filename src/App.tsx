@@ -1,8 +1,6 @@
-import { useState } from 'react'
-import type { FC } from 'react'
 import { Contact } from './contact/'
 
-function App(): FC {
+function App() {
   const className = 'phonebook'
   console.log(Contact)
 
