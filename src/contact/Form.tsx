@@ -3,7 +3,7 @@ import type { Contact } from '../types'
 
 interface Props {
   active: number;
-  contacts: Contact[];
+  contacts: Array<Contact>;
   setContacts: Dispatch<SetStateAction<Contact[]>>;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
 }
@@ -16,14 +16,14 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
   }
 
   function editContact(formData: FormData) {
-    let temp: Contact = {
-      name: formData.get('name'),
-      telephone: formData.get('telephone'),
-      street: formData.get('street'),
-      city: formData.get('city'),
-      state: formData.get('state'),
-      zip: formData.get('zip'),
-      email: formData.get('email'),
+    let temp: Omit<Contact, 'entries'> = {
+      name: formData.get('name') as string,
+      telephone: formData.get('telephone') as string,
+      street: formData.get('street') as string,
+      city: formData.get('city') as string,
+      state: formData.get('state') as string,
+      zip: formData.get('zip') as string,
+      email: formData.get('email') as string,
     }
 
     contacts[active] = { ...contacts[active], ...temp }
@@ -38,7 +38,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
         <input
           name='name'
           type='text'
-          defaultValue={address.name}
+          defaultValue={address.name ?? ''}
         />
       </label>
       <label>
@@ -46,14 +46,14 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
         <input
           name='telephone'
           type='tel'
-          defaultValue={address.telephone}
+          defaultValue={address.telephone ?? ''}
         />
       </label>
       <label>
         <span>Street</span>
         <textarea
           name='street'
-          defaultValue={address.street}
+          defaultValue={address.street ?? ''}
         />
       </label>
       <label>
@@ -61,7 +61,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
         <input
           name='city'
           type='text'
-          defaultValue={address.city}
+          defaultValue={address.city  ?? ''}
         />
       </label>
       <label>
@@ -69,7 +69,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
         <input
           name='state'
           type='text'
-          defaultValue={address.state}
+          defaultValue={address.state ?? ''}
         />
       </label>
       <label>
@@ -77,7 +77,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
         <input
           name='zip'
           type='text'
-          defaultValue={address.zip}
+          defaultValue={address.zip ?? ''}
         />
       </label>
       <label>
@@ -85,7 +85,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
         <input
           name='email'
           type='email'
-          defaultValue={address.email}
+          defaultValue={address.email ?? ''}
         />
       </label>
       <div>

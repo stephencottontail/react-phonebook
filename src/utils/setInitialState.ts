@@ -1,4 +1,5 @@
 import type { Contact, Entry } from '../types'
+import { verifyObject } from '../utils/'
 
 interface FirstNames {
   uppercase: string;
@@ -43,19 +44,19 @@ function getLastName(): string {
   return lastNames[i]
 }
 
-function getAddress(): object {
+function getAddress(): Partial<Contact> {
   const i = Math.floor(Math.random() * 6)
 
   return addresses[i]
 }
 
-function makeAddresses(firstName: Array<FirstNames>, lastName: Array<string>): Contact[] {
+function makeAddresses(firstName: Array<FirstNames>, lastName: Array<string>): Array<Partial<Contact>> {
   const addresses = [
     getAddress(),
     getAddress(),
   ]
-  const first: Contact = { name: `${firstName[0].uppercase} ${lastName[0]}`, telephone: '(555) 409-2304', email: `${firstName[0].lowercase}@example.org`, ...addresses[0] }
-  const second: Contact = { name: `${firstName[1].uppercase} ${lastName[1]}`, telephone: '(555) 409-2304', email: `${firstName[1].lowercase}@example.org`, ...addresses[1] }
+  const first: Partial<Contact> = { name: `${firstName[0].uppercase} ${lastName[0]}`, telephone: '(555) 409-2304', email: `${firstName[0].lowercase}@example.org`, ...addresses[0] }
+  const second: Partial<Contact> = { name: `${firstName[1].uppercase} ${lastName[1]}`, telephone: '(555) 409-2304', email: `${firstName[1].lowercase}@example.org`, ...addresses[1] }
 
   return [first, second]
 }
@@ -85,7 +86,8 @@ function makeEntries(names: Array<string>): Array<Entry[]> {
   return [first, second]
 }
 
-export function setInitialState(): Contact[] {
+export function setInitialState(): Array<Contact> {
+  let data: Array<Contact> = []
   const firstNames = [
     getFirstName(),
     getFirstName(),
@@ -96,14 +98,36 @@ export function setInitialState(): Contact[] {
   ]
   const entries = makeEntries([firstNames[0].uppercase, firstNames[1].uppercase])
   const addresses = makeAddresses(firstNames, lastNames)
-  const first: Contact = {
-    ...addresses[0],
-    entries: entries[0]
-  }
-  const second: Contact = {
-    ...addresses[1],
-    entries: entries[1]
+
+  if (verifyObject(addresses[0])) {
+    const first: Contact = {
+      name: addresses[0].name,
+      telephone: addresses[0].telephone,
+      street: addresses[0].street,
+      city: addresses[0].city,
+      state: addresses[0].state,
+      zip: addresses[0].zip,
+      email: addresses[0].email,
+      entries: entries[0],
+    }
+
+    data.push(first)
   }
 
-  return [first, second]
+  if (verifyObject(addresses[1])) {
+    const second: Contact = {
+      name: addresses[1].name,
+      telephone: addresses[1].telephone,
+      street: addresses[1].street,
+      city: addresses[1].city,
+      state: addresses[1].state,
+      zip: addresses[1].zip,
+      email: addresses[1].email,
+      entries: entries[1],
+    }
+
+    data.push(second)
+  }
+
+  return data
 }
