@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react'
 import type { Contact } from '../types'
+import { baseClassName } from '../constants'
 
 interface Props {
   active: number;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export function Form({active, contacts, setContacts, setIsEditing}: Props) {
+  const baseClass = `${baseClassName}__form`
   const address: Contact= contacts[active]
 
   function handleCancel() {
@@ -32,69 +34,76 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
   }
 
   return (
-    <form action={editContact}>
-      <label>
-        <span>Name</span>
+    <form className={`${baseClass} grid`} action={editContact}>
+      <label className='double'>
+        <span className={`${baseClassName}__label`}>Name</span>
         <input
+          className={`${baseClassName}__content`}
           name='name'
           type='text'
           defaultValue={address.name ?? ''}
         />
       </label>
-      <label>
-        <span>Telephone</span>
+      <label className='double'>
+        <span className={`${baseClassName}__label`}>Telephone</span>
         <input
+          className={`${baseClassName}__content`}
           name='telephone'
           type='tel'
           defaultValue={address.telephone ?? ''}
         />
       </label>
-      <label>
-        <span>Street</span>
+      <label className='double'>
+        <span className={`${baseClassName}__label`}>Street</span>
         <textarea
+          className={`${baseClassName}__content`}
           name='street'
           defaultValue={address.street ?? ''}
         />
       </label>
       <label>
-        <span>City</span>
+        <span className={`${baseClassName}__label`}>City</span>
         <input
+          className={`${baseClassName}__content`}
           name='city'
           type='text'
           defaultValue={address.city  ?? ''}
         />
       </label>
       <label>
-        <span>State</span>
+        <span className={`${baseClassName}__label`}>State</span>
         <input
+          className={`${baseClassName}__content`}
           name='state'
           type='text'
           defaultValue={address.state ?? ''}
         />
       </label>
       <label>
-        <span>Zip</span>
+        <span className={`${baseClassName}__label`}>Zip</span>
         <input
           name='zip'
           type='text'
           defaultValue={address.zip ?? ''}
         />
       </label>
-      <label>
-        <span>Email</span>
+      <label className='double'>
+        <span className={`${baseClassName}__label`}>Email</span>
         <input
+          className={`${baseClassName}__content`}
           name='email'
           type='email'
           defaultValue={address.email ?? ''}
         />
       </label>
-      <div>
+      <div className={`${baseClassName}__buttons double`}>
         <button
+          className={'button'}
           onClick={handleCancel}
         >
           Cancel
         </button>
-        <button>
+        <button className={'button button-solid'}>
           Save
         </button>
       </div>

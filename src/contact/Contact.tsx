@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import type { Contact } from '../types/'
+import { baseClassName } from '../constants'
+import { Display, Form, Journal } from '../contact'
 import { setInitialState } from '../utils/'
-import { Display } from './Display.tsx'
-import { Form } from './Form.tsx'
-import { Journal } from './Journal.tsx'
 
 export function Contact() {
   const [isEditing, setIsEditing] = useState(false)
@@ -12,8 +11,11 @@ export function Contact() {
 
   return (
     <>
-      <div>
+      <div
+        className={`${baseClassName}__buttons`}
+      >
         <button
+          className={'button button-solid'}
           onClick={ () => {
             const newContact: Contact = {
               name: '',
@@ -43,15 +45,18 @@ export function Contact() {
 
         return (
           <div
+            className={`${baseClassName}__header ${isActive ? 'header-active' : ''}`}
             key={`header-${i}`}
           >
-            <p>{el.name}</p>
-            <p>{el.telephone}</p>
-            <div>
+            <h2 className={`${baseClassName}__header__title`}>{el.name}</h2>
+            <p className={`${baseClassName}__header__subtitle`}>{el.telephone}</p>
+            <div
+              className={`${baseClassName}__buttons`}
+            >
               { ! isEditing && (
                 <>
                   <button
-                    className={`toggle ${isActive ? 'is-active' : ''}`}
+                    className={`button button-solid ${isActive ? 'button-active' : ''}`}
                     onClick={ () => {
                       if (active == i) {
                         setActive(-1)
@@ -63,6 +68,7 @@ export function Contact() {
                     { isActive ? 'Hide' : 'Show' }
                   </button>
                   <button
+                    className={'button button-solid'}
                     onClick={ () => {
                       setIsEditing(true)
                     }}

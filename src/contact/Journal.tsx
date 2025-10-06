@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
+import { baseClassName } from '../constants'
 import type { Contact, Entry } from '../types'
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 
 export function Journal({ active, contacts, setContacts, entries }: Props) {
   const [isAddingEntry, setIsAddingEntry] = useState(false)
+  const baseClass = `${baseClassName}__journal`
 
   const locale: string = 'en-US' // problematically assume user locale
   const options: Intl.DateTimeFormatOptions = {
@@ -46,21 +48,25 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
   }
 
   return (
-    <div className='journal'>
+    <div className={`${baseClass}`}>
       { entries != null && entries.length
         ? (
-          <div className='journal__entries'>
+          <div className={`${baseClass}__entries`}>
             { entries.map((el: Entry, i: number) => {
               const sHTML: string = parseAndSanitizeMarkdown(el.content)
 
               return (
                 <article
+                  className={`${baseClass}__entry`}
                   key={`journal-${i}`}
                 >
-                  <header>
-                    <p>{el.date.toLocaleDateString(locale, options)}</p>
+                  <header className={`${baseClass}__entry__header`}>
+                    <time className={`${baseClass}__entry__date`} dateTime={el.date.toISOString()}>{el.date.toLocaleDateString(locale, options)}</time>
                   </header>
-                  <div dangerouslySetInnerHTML={{ __html: sHTML }} />
+                  <div
+                    className={`${baseClass}__entry__content`}
+                    dangerouslySetInnerHTML={{ __html: sHTML }}
+                  />
                 </article>
               )
             })}
@@ -70,7 +76,7 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
           <div><p>No Entries</p></div>
         )
       }
-      <div className='journal__controls'>
+      <div className={`${baseClass}__controls`}>
         { isAddingEntry && (
           <form className='journal__form' action={addEntry}>
             <p>{new Date().toLocaleDateString(locale, options)}</p>
@@ -79,9 +85,10 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
             <button>Save</button>
           </form>
         )}
-        <div className='journal__controls__buttons'>
+        <div className={`${baseClassName}__buttons`}>
           { ! isAddingEntry && (
             <button
+              className={'button button-solid'}
               onClick={ () => {
                 setIsAddingEntry(true)
               }}

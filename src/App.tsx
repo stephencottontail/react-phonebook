@@ -1,11 +1,9 @@
 import { Contact } from './contact/'
+import { baseClassName } from './constants'
 
 function App() {
-  const className = 'phonebook'
-  console.log(Contact)
-
   return (
-    <div className={ className}>
+    <div className={baseClassName}>
       <Contact />
     </div>
   )
