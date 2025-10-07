@@ -1,5 +1,6 @@
 import { Contact } from './contact/'
 import { baseClassName } from './constants'
+import './App.css'
 
 function App() {
   return (
