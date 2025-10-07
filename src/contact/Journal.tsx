@@ -78,11 +78,11 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
       }
       <div className={`${baseClass}__controls`}>
         { isAddingEntry && (
-          <form className={`${baseClassName}__from`} action={addEntry}>
-            <time dateTime={new Date().toISOString()}>{new Date().toLocaleDateString(locale, options)}</time>
-            <textarea name='markdown'></textarea>
-            <p>You can use <a href='https://daringfireball.net/projects/markdown/' target='_blank' rel='noopener noreferrer'>Markdown</a></p>
-            <div className={`${baseClassName}__buttons`}>
+          <form className={`${baseClassName}__form`} action={addEntry}>
+            <time className='full' dateTime={new Date().toISOString()}>{new Date().toLocaleDateString(locale, options)}</time>
+            <textarea className='full' name='markdown'></textarea>
+            <p className='full'>You can use <a href='https://daringfireball.net/projects/markdown/' target='_blank' rel='noopener noreferrer'>Markdown</a></p>
+            <div className={`${baseClassName}__buttons full`}>
               <button className={'button button-solid'}>Save</button>
             </div>
           </form>
