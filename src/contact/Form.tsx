@@ -34,7 +34,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
   }
 
   return (
-    <form className={`${baseClass} grid`} action={editContact}>
+    <form className={`${baseClass}`} action={editContact}>
       <label className='double'>
         <span className={`${baseClassName}__label`}>Name</span>
         <input
@@ -53,15 +53,15 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
           defaultValue={address.telephone ?? ''}
         />
       </label>
-      <label className='double'>
+      <label className='triple'>
         <span className={`${baseClassName}__label`}>Street</span>
-        <textarea
+        <input
           className={`${baseClassName}__content`}
           name='street'
           defaultValue={address.street ?? ''}
         />
       </label>
-      <label>
+      <label className='triple'>
         <span className={`${baseClassName}__label`}>City</span>
         <input
           className={`${baseClassName}__content`}
@@ -70,7 +70,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
           defaultValue={address.city  ?? ''}
         />
       </label>
-      <label>
+      <label className='triple'>
         <span className={`${baseClassName}__label`}>State</span>
         <input
           className={`${baseClassName}__content`}
@@ -79,7 +79,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
           defaultValue={address.state ?? ''}
         />
       </label>
-      <label>
+      <label className='double'>
         <span className={`${baseClassName}__label`}>Zip</span>
         <input
           name='zip'
@@ -96,7 +96,7 @@ export function Form({active, contacts, setContacts, setIsEditing}: Props) {
           defaultValue={address.email ?? ''}
         />
       </label>
-      <div className={`${baseClassName}__buttons double`}>
+      <div className={`${baseClassName}__buttons full`}>
         <button
           className={'button'}
           onClick={handleCancel}

@@ -48,8 +48,10 @@ export function Contact() {
             className={`${baseClassName}__header ${isActive ? 'header-active' : ''}`}
             key={`header-${i}`}
           >
-            <h2 className={`${baseClassName}__header__title`}>{el.name}</h2>
-            <p className={`${baseClassName}__header__subtitle`}>{el.telephone}</p>
+            <div>
+              <h2 className={`${baseClassName}__header__title`}>{el.name}</h2>
+              <p className={`${baseClassName}__header__subtitle`}>{el.telephone}</p>
+            </div>
             <div
               className={`${baseClassName}__buttons`}
             >
@@ -70,6 +72,7 @@ export function Contact() {
                   <button
                     className={'button button-solid'}
                     onClick={ () => {
+                      setActive(i)
                       setIsEditing(true)
                     }}
                   >

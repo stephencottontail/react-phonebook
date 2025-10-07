@@ -79,10 +79,12 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
       <div className={`${baseClass}__controls`}>
         { isAddingEntry && (
           <form className='journal__form' action={addEntry}>
-            <p>{new Date().toLocaleDateString(locale, options)}</p>
+            <time dateTime={new Date().toISOString()}>{new Date().toLocaleDateString(locale, options)}</time>
             <textarea name='markdown'></textarea>
             <p>You can use <a href='https://daringfireball.net/projects/markdown/' target='_blank' rel='noopener noreferrer'>Markdown</a></p>
-            <button>Save</button>
+            <div className={`${baseClassName}__buttons`}>
+              <button className={'button button-solid'}>Save</button>
+            </div>
           </form>
         )}
         <div className={`${baseClassName}__buttons`}>
