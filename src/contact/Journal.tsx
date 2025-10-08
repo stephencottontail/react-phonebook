@@ -48,38 +48,40 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
   }
 
   return (
-    <div className={`${baseClass}`}>
-      { entries != null && entries.length
-        ? (
-          <div className={`${baseClass}__entries`}>
-            { entries.map((el: Entry, i: number) => {
-              const sHTML: string = parseAndSanitizeMarkdown(el.content)
+    <>
+      <div className={`${baseClass}`}>
+        { entries != null && entries.length
+          ? (
+            <div className={`${baseClass}__entries`}>
+              { entries.map((el: Entry, i: number) => {
+                const sHTML: string = parseAndSanitizeMarkdown(el.content)
 
-              return (
-                <article
-                  className={`${baseClass}__entry`}
-                  key={`journal-${i}`}
-                >
-                  <header className={`${baseClass}__entry__header`}>
-                    <time className={`${baseClass}__entry__date`} dateTime={el.date.toISOString()}>{el.date.toLocaleDateString(locale, options)}</time>
-                  </header>
-                  <div
-                    className={`${baseClass}__entry__content`}
-                    dangerouslySetInnerHTML={{ __html: sHTML }}
-                  />
-                </article>
-              )
-            })}
-          </div>
-        )
-        : (
-          <div><p>No Entries</p></div>
-        )
-      }
-      <div className={`${baseClass}__controls`}>
+                return (
+                  <article
+                    className={`${baseClass}__entry`}
+                    key={`journal-${i}`}
+                  >
+                    <header className={`${baseClass}__entry__header`}>
+                      <time className={`${baseClass}__entry__date`} dateTime={el.date.toISOString()}>{el.date.toLocaleDateString(locale, options)}</time>
+                    </header>
+                    <div
+                      className={`${baseClass}__entry__content`}
+                      dangerouslySetInnerHTML={{ __html: sHTML }}
+                    />
+                  </article>
+                )
+              })}
+            </div>
+          )
+          : (
+            <div><p>No Entries</p></div>
+          )
+        }
+      </div>
+        <div className={`${baseClass}__controls`}>
         { isAddingEntry && (
           <form className={`${baseClassName}__form`} action={addEntry}>
-            <time className='full' dateTime={new Date().toISOString()}>{new Date().toLocaleDateString(locale, options)}</time>
+            <time className={`${baseClass}__form__date full`} dateTime={new Date().toISOString()}>{new Date().toLocaleDateString(locale, options)}</time>
             <textarea className='full' name='markdown'></textarea>
             <p className='full'>You can use <a href='https://daringfireball.net/projects/markdown/' target='_blank' rel='noopener noreferrer'>Markdown</a></p>
             <div className={`${baseClassName}__buttons full`}>
@@ -100,6 +102,6 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
           )}
         </div>
       </div>
-    </div>
+    </>
   )
 }

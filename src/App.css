@@ -1,8 +1,8 @@
 #root {
-  width: 80%;
-  max-width: 720px;
-  min-width: 560px;
-  margin: 0 auto;
+  inline-size: 80%;
+  max-inline-size: 720px;
+  min-inline-size: 560px;
+  margin-inline: auto;
 }
 
 .grid {
@@ -10,6 +10,13 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   grid-auto-flow: rows;
+
+  & > * {
+    align-content: center;
+    box-sizing: border-box;
+    border: 1px solid red; /* XXX */
+    padding: 5px;
+  }
 
   .double {
     grid-column: 1 / 4;
@@ -28,6 +35,20 @@
   align-items: center;
   justify-content: space-between;
   gap: 5px;
+  padding-block: 5px;
+  padding-inline-start: 5px;
+}
+
+.phonebook__header__title,
+.phonebook__journal__entry__date,
+.phonebook__journal__form__date {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-block: 0;
+}
+
+.phonebook__header__subtitle {
+  margin-block: 0;
 }
 
 .phonebook__form {
@@ -37,8 +58,8 @@
   & > * {
     align-content: center;
     box-sizing: border-box;
+    border: 1px solid red; /* XXX */
     padding: 5px;
-    border: 1px solid red;
   }
 
   span. time {
@@ -58,13 +79,37 @@
   }
 }
 
+.phonebook__label {
+  display: block;
+  margin-block: 0 5px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+.phonebook__content {
+  margin: 0;
+}
+
+input, textarea {
+  box-sizing: border-box;
+  margin: 0;
+  inline-size: 100%;
+}
+
 .phonebook__buttons {
   display: flex;
   justify-content: end;
   gap: 5px;
-  padding: 5px;
+  padding-inline-end: 5px;
+  border: 1px solid red; /* XXX */
+
+  button {
+    background: black;
+    color: white;
+  }
 }
 
 .phonebook__journal {
-  padding: 5px;
+  padding-block: 5px;
+  padding-inline-start: 5px;
 }
