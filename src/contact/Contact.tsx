@@ -85,7 +85,7 @@ export function Contact() {
         )
       })}
       { active != -1
-        ? isEditing
+        ? isEditing !== false
           ? (
             <Form
               active={active}
