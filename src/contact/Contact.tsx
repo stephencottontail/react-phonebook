@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { Contact } from '../types/'
 import { baseClassName } from '../constants'
 import { Display, Form, Journal } from '../contact'
-import { setInitialState } from '../utils/'
+import { formatPhoneNumber, setInitialState } from '../utils/'
 
 export function Contact() {
   const [contacts, setContacts] = useState(setInitialState)
@@ -50,7 +50,7 @@ export function Contact() {
           >
             <div>
               <h2 className={`${baseClassName}__header__title`}>{el.name}</h2>
-              <p className={`${baseClassName}__header__subtitle`}>{el.telephone}</p>
+              <p className={`${baseClassName}__header__subtitle`}>{formatPhoneNumber(el.telephone as string)}</p>
             </div>
             <div
               className={`${baseClassName}__buttons`}

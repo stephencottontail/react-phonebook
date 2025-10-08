@@ -6,7 +6,7 @@ interface Props {
   active: number;
   contacts: Array<Contact>;
   setContacts: Dispatch<SetStateAction<Contact[]>>;
-  setIsEditing: Dispatch<SetStateAction<boolean>>;
+  setIsEditing: Dispatch<SetStateAction<number | false>>;
 }
 
 export function Form({active, contacts, setContacts, setIsEditing}: Props) {

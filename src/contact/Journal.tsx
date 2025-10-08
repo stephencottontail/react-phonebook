@@ -85,7 +85,7 @@ export function Journal({ active, contacts, setContacts, entries }: Props) {
             <textarea
               className='full'
               name='markdown'
-              rows='6'
+              rows={6}
             />
             <p className='full'>You can use <a href='https://daringfireball.net/projects/markdown/' target='_blank' rel='noopener noreferrer'>Markdown</a></p>
             <div className={`${baseClassName}__buttons full`}>
