@@ -5,8 +5,8 @@ import { Display, Form, Journal } from '../contact'
 import { setInitialState } from '../utils/'
 
 export function Contact() {
-  const [isEditing, setIsEditing] = useState(false)
   const [contacts, setContacts] = useState(setInitialState)
+  const [isEditing, setIsEditing] = useState<number | false>(false)
   const [active, setActive] = useState(contacts.length - 1)
 
   return (
@@ -34,7 +34,7 @@ export function Contact() {
 
             setContacts(newContacts)
             setActive(newContacts.length - 1)
-            setIsEditing(true)
+            setIsEditing(newContacts.length - 1)
           }}
         >
           Add New
@@ -45,7 +45,7 @@ export function Contact() {
 
         return (
           <div
-            className={`${baseClassName}__header ${isActive ? 'header-active' : ''}`}
+            className={`${baseClassName}__header ${isEditing == i ? 'header-editing' : ''} ${isActive ? 'header-active' : ''}`}
             key={`header-${i}`}
           >
             <div>
@@ -73,7 +73,7 @@ export function Contact() {
                     className={'button button-solid'}
                     onClick={ () => {
                       setActive(i)
-                      setIsEditing(true)
+                      setIsEditing(i)
                     }}
                   >
                     Edit
