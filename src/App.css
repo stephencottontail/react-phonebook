@@ -1,115 +1,161 @@
-#root {
-  inline-size: 80%;
-  max-inline-size: 720px;
-  min-inline-size: 560px;
-  margin-inline: auto;
-}
+@layers theirs, mine;
+@import url('./main.css') layer(theirs);
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
-  grid-auto-flow: rows;
-
-  & > * {
-    align-content: center;
-    box-sizing: border-box;
-    border: 1px solid red; /* XXX */
-    padding: 5px;
+@layer mine {
+  :root {
+    --gray-500: #383732;
+    --gray-400: #726F68;
+    --gray-300: #D8D3CA;
+    --gray-200: #F0ECE6;
+    --gray-100: #F4F1EA;
+    --gray-050: #FAF9F4;
+    --red-500: #9B2121;
+    --red-400: #CB2929;
+    --red-300: #FC3636;
+    --red-200: #FF8575;
+    --red-100: #FFB4AA
   }
 
-  .double {
-    grid-column: 1 / 4;
-    grid-row: auto;
-  }
-}
-
-.phonebook {
-  width: 100%;
-}
-
-.phonebook__header {
-  display: flex;
-  flex: 1 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 5px;
-  padding-block: 5px;
-  padding-inline-start: 5px;
-}
-
-.phonebook__header__title,
-.phonebook__journal__entry__date,
-.phonebook__journal__form__date {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-block: 0;
-}
-
-.phonebook__header__subtitle {
-  margin-block: 0;
-}
-
-.phonebook__form {
-  display: flex;
-  flex-wrap: wrap;
-
-  & > * {
-    align-content: center;
-    box-sizing: border-box;
-    border: 1px solid red; /* XXX */
-    padding: 5px;
+  html {
+    background: var(--gray-100);
+    color: var(--gray-500);
   }
 
-  span. time {
-    display: block;
+  #root {
+    font-family: sans-serif;
+    inline-size: 80%;
+    max-inline-size: 720px;
+    min-inline-size: 560px;
+    margin-inline: auto;
   }
 
-  .full {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-auto-flow: rows;
+
+    & > * {
+      align-content: center;
+      box-sizing: border-box;
+      padding: 5px;
+    }
+
+    .double {
+      grid-column: 1 / 4;
+      grid-row: auto;
+    }
+  }
+
+  .phonebook {
+    width: 100%;
+  }
+
+  .phonebook__header {
+    display: flex;
     flex: 1 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    min-block-size: 45px;
+    margin-block-start: 10px;
+    padding-block: 10px;
+    padding-inline-start: 5px;
+    background: var(--red-400);
+    color: var(--gray-100);
   }
 
-  .double {
-    flex: 0 0 50%;
+  .phonebook__header__title,
+  .phonebook__journal__entry__date,
+  .phonebook__journal__form__date {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-block: 0;
   }
 
-  .triple {
-    flex: 0 0 33.3333%;
+  .phonebook__header__subtitle {
+    margin-block: 0;
   }
-}
 
-.phonebook__label {
-  display: block;
-  margin-block: 0 5px;
-  font-size: 0.8em;
-  text-transform: uppercase;
-}
+  .phonebook__form {
+    display: flex;
+    flex-wrap: wrap;
 
-.phonebook__content {
-  margin: 0;
-}
+    & > * {
+      box-sizing: border-box;
+      padding: 5px;
+      margin-block: 0 5px;
+    }
 
-input, textarea {
-  box-sizing: border-box;
-  margin: 0;
-  inline-size: 100%;
-}
+    span. time {
+      display: block;
+    }
 
-.phonebook__buttons {
-  display: flex;
-  justify-content: end;
-  gap: 5px;
-  padding-inline-end: 5px;
-  border: 1px solid red; /* XXX */
+    .full {
+      flex: 1 100%;
+    }
 
-  button {
-    background: black;
-    color: white;
+    .double {
+      flex: 0 0 50%;
+    }
+
+    .triple {
+      flex: 0 0 33.3333%;
+    }
   }
-}
 
-.phonebook__journal {
-  padding-block: 5px;
-  padding-inline-start: 5px;
+  .phonebook__label {
+    display: block;
+    margin-block: 0 5px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+  }
+
+  .phonebook__content {
+    margin: 0;
+  }
+
+  input, textarea {
+    background: var(--gray-050);
+    border-color: var(--gray-500);
+    border-style: solid;
+    box-sizing: border-box;
+    font-size: 1em;
+    margin: 0;
+    padding: 5px;
+    inline-size: 100%;
+
+    &:hover,
+    &:focus {
+      border-color: var(--red-400);
+    }
+  }
+
+  .phonebook__buttons {
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+    padding-inline-end: 5px;
+
+    button {
+      background: var(--red-400);
+      /*border: 2px solid var(--gray-100);*/
+      color: var(--gray-100);
+      font-size: 1em;
+      padding-block: 10px;
+      padding-inline: 20px;
+
+      &:hover,
+      &:active {
+        background: var(--red-500);
+      }
+    }
+  }
+
+  .phonebook__journal {
+    margin-block-start: 20px;
+    padding-block: 5px;
+    padding-inline-start: 5px;
+  }
 }
